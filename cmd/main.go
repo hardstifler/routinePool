@@ -8,7 +8,7 @@ import (
 
 
 func main(){
-  fmt.Println(version.GitVersion)
+  	fmt.Println(version.GitVersion)
 	fmt.Println(version.BuildTimeStamp)
 	fmt.Println(version.OS)
 }
