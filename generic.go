@@ -5,7 +5,6 @@ import "fmt"
 type MyNumber interface {
 	int |int32|float64
 }
-
 func main() {
 	var m1 map[string]int = map[string]int{
 		"1": 1,
@@ -26,9 +25,7 @@ func main() {
 
 	fmt.Println(addWithGeneric(m1))
 	fmt.Println(addWithGeneric(m2))
-  
-  //目前泛型约束不能省略
-  //居然必须手动指定类型，希望后续有更智能的类型推导
+	//此处的泛型约束不能省略，否则报错，后续应该会有类型默认的类型推导
 	t1 := &GenericStruct[bool]{
 		Value:true,
 		Elem:"hello",
@@ -41,7 +38,6 @@ func main() {
 
 	fmt.Println(t1.GetValue())
 	fmt.Println(t2.GetValue())
-
 
 	intSlice := []int{1,2,3,4,5}
 	floatSlice := []float64{1.1,2.2,3.3, 4.4}
@@ -73,12 +69,10 @@ func addWithGeneric[K comparable, V MyNumber](args map[K]V) V{
 	return sum
 }
 
-
 type GenericStruct[T any] struct{
 	Value T  `json:"value"`
 	Elem string  `json:"elem"`
 }
-
 
 func (e *GenericStruct[T])GetValue()T{
 	return e.Value
