@@ -3,6 +3,8 @@
 
 并发执行方法 [parallel.go](https://github.com/hardstifler/routinePool/blob/main/parallel.go)
 
+golang 1.18 泛型初体验 [generic.go](https://github.com/hardstifler/routinePool/blob/main/generic.go)
+
 
 # ldflags -X 
 main.go中输出了几个版本号信息 [mian.go](https://github.com/hardstifler/routinePool/blob/main/cmd/main.go)
