@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"constraints"
+	"fmt"
+)
 
 type MyNumber interface {
 	int |int32|float64
@@ -25,7 +28,6 @@ func main() {
 
 	fmt.Println(addWithGeneric(m1))
 	fmt.Println(addWithGeneric(m2))
-	//此处的泛型约束不能省略，否则报错，后续应该会有类型默认的类型推导
 	t1 := &GenericStruct[bool]{
 		Value:true,
 		Elem:"hello",
@@ -43,6 +45,10 @@ func main() {
 	floatSlice := []float64{1.1,2.2,3.3, 4.4}
 	fmt.Println(Max(intSlice...))
 	fmt.Println(Max(floatSlice...))
+
+	sliceP := []int32{1,2,3,4}
+	var e int32  = 2 
+	fmt.Println(Scale(sliceP, e))
 }
 
 func addInt(args map[string]int) int {
@@ -90,4 +96,13 @@ func Max[T MyNumber](elem ...T)T{
 		}
 	}
 	return max
+}
+
+
+func Scale[S ~[]E, E constraints.Integer](s S, e E)S{
+	res := make(S, len(s))
+	for i,v := range s{
+		res[i] = v*e
+	}
+	return res
 }
