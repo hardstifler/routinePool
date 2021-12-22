@@ -5,6 +5,12 @@ import (
 	"fmt"
 )
 
+/**
+https://go.dev/doc/tutorial/generics
+golang 1.18 泛型初探
+*/
+
+//定义类型约束集合
 type MyNumber interface {
 	int |int32|float64
 }
@@ -28,6 +34,8 @@ func main() {
 
 	fmt.Println(addWithGeneric(m1))
 	fmt.Println(addWithGeneric(m2))
+	
+	//泛型结构体，泛型参数暂时不可以省略，不是很爽
 	t1 := &GenericStruct[bool]{
 		Value:true,
 		Elem:"hello",
@@ -67,6 +75,7 @@ func addFloat(args map[string]float64) float64 {
 	return sum
 }
 
+//golang map key 必须是可以比较的； 次数定义K类型为可比较类型， V类型为上面定义的类型集合 
 func addWithGeneric[K comparable, V MyNumber](args map[K]V) V{
 	var sum V
 	for _, v := range args {
@@ -75,19 +84,23 @@ func addWithGeneric[K comparable, V MyNumber](args map[K]V) V{
 	return sum
 }
 
+//结构体中如何使用泛型
 type GenericStruct[T any] struct{
 	Value T  `json:"value"`
 	Elem string  `json:"elem"`
 }
 
+//泛型结构体的方法
 func (e *GenericStruct[T])GetValue()T{
 	return e.Value
 }
 
+//类型别名中使用泛型
 type GenericSlice[T any] []T 
 
 type GenericMaps[K comparable, V any] map[K]V 
 
+//泛型函数
 func Max[T MyNumber](elem ...T)T{
 	var max T 
 	for _,v := range elem {
@@ -98,7 +111,8 @@ func Max[T MyNumber](elem ...T)T{
 	return max
 }
 
-
+//泛型函数 ~波浪线表示底层类型是E slice即可 
+//因此  type point[E] []E类型 在此处是合法的
 func Scale[S ~[]E, E constraints.Integer](s S, e E)S{
 	res := make(S, len(s))
 	for i,v := range s{
