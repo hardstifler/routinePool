@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+//https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md
+
 type MyNumber interface {
 	int |int32|float64
 }
