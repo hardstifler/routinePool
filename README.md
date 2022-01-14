@@ -1,7 +1,9 @@
 # routinePool
 简易任务池 [pool.go](https://github.com/hardstifler/routinePool/blob/main/pool.go)  
 
-并发执行方法 [parallel.go](https://github.com/hardstifler/routinePool/blob/main/parallel.go)
+并发执行方法 [parallel.go](https://github.com/hardstifler/routinePool/blob/main/parallel.go) 
+
+golang kafka 示例 [kafkax.go](https://github.com/hardstifler/routinePool/blob/main/kafkax.go) 
 
 golang 1.18Beta 泛型初体验 [generic.go](https://github.com/hardstifler/routinePool/blob/main/generic.go)
 
